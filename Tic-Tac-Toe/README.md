@@ -31,7 +31,6 @@
 
 Если jq не установлен, используйте команды без | jq
 
----
 
 ### Регистрация пользователя
 
@@ -41,8 +40,6 @@
 curl -s -X POST http://localhost:8080/api/auth/register -H "Content-Type: application/json" -d '{"login":"testuser8","password":"mypassword8"}'
 ```
 
----
-
 ### Авторизация пользователя 
 
 Возвращает токены `ACCESSTOKEN` и `REFRESHTOKEN`.
@@ -50,8 +47,6 @@ curl -s -X POST http://localhost:8080/api/auth/register -H "Content-Type: applic
 ```bash
 curl -s -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d '{"login":"testuser1","password":"mypassword1"}' | jq
 ```
-
----
 
 ### Получение информации о пользователе по access-токену
 
@@ -61,7 +56,6 @@ curl -s -X POST http://localhost:8080/api/auth/login -H "Content-Type: applicati
 curl -s -X GET http://localhost:8080/api/auth/me -H "Authorization: Bearer ACCESSTOKEN" | jq
 ```
 
----
 ### Рефреш access-токена
 
 Без авторизации. Требуется `REFRESHTOKEN`. Возвращает новый `ACCESSTOKEN` и старый `REFRESHTOKEN`.
@@ -69,8 +63,6 @@ curl -s -X GET http://localhost:8080/api/auth/me -H "Authorization: Bearer ACCES
 ```bash
 curl -s -X POST http://localhost:8080/api/auth/refresh/access -H "Content-Type: application/json" -d '{"refreshToken":"REFRESHTOKEN"}' | jq
 ```
-
----
 
 ### Рефреш refresh-токена 
 
@@ -80,8 +72,6 @@ curl -s -X POST http://localhost:8080/api/auth/refresh/access -H "Content-Type: 
 curl -s -X POST http://localhost:8080/api/auth/refresh/refresh -H "Content-Type: application/json" -H "Authorization: Bearer ACCESSTOKEN" -d '{"refreshToken":"REFRESHTOKEN"}' | jq
 ```
 
----
-
 ### Получение истории игр по access-токену пользователя
 
 Требуется авторизация по `ACCESSTOKEN`. Возвращает список завершённых игр пользователя.
@@ -89,8 +79,6 @@ curl -s -X POST http://localhost:8080/api/auth/refresh/refresh -H "Content-Type:
 ```bash
 curl -s -X GET http://localhost:8080/game/history -H "Authorization: Bearer ACCESSTOKEN" | jq
 ```
-
----
 
 ### Получение лучших игроков 
 
@@ -100,8 +88,6 @@ curl -s -X GET http://localhost:8080/game/history -H "Authorization: Bearer ACCE
 curl -s -X GET "http://localhost:8080/api/leaderboard/top/{limit}" -H "Authorization: Bearer ACCESSTOKEN" | jq
 ```
 
----
-
 ### Старт игры
 
 Выберите игру против бота (`vsBot=true`) или против другого игрока (`vsBot=false`). Требуется авторизация по `ACCESSTOKEN`. Возвращает ID игры, статус и пустое поле.
@@ -109,8 +95,6 @@ curl -s -X GET "http://localhost:8080/api/leaderboard/top/{limit}" -H "Authoriza
 ```bash
 curl -s -X POST "http://localhost:8080/game/start?vsBot=true" -H "Authorization: Bearer ACCESSTOKEN"
 ```
-
----
 
 ### Ход в игре
 
@@ -122,8 +106,6 @@ curl -s -X POST "http://localhost:8080/game/start?vsBot=true" -H "Authorization:
 curl -s -X POST "http://localhost:8080/game/{gameId}/move" -H "Content-Type: application/json" -H "Authorization: Bearer ACCESSTOKEN" -d '{"field":[[0,0,0],[0,1,0],[0,0,0]]}'
 ```
 
----
-
 ### Присоединиться к игре
 
 Требуется `{gameId}` и авторизация по `ACCESSTOKEN` пользователя.
@@ -132,8 +114,6 @@ curl -s -X POST "http://localhost:8080/game/{gameId}/move" -H "Content-Type: app
 curl -s -X POST "http://localhost:8080/game/{gameId}/join" -H "Content-Type: application/json" -H "Authorization: Bearer ACCESSTOKEN"
 ```
 
----
-
 ### Получить состояние игры по ID
 
 Требуется `{gameId}` и авторизация по `ACCESSTOKEN`.
@@ -141,5 +121,3 @@ curl -s -X POST "http://localhost:8080/game/{gameId}/join" -H "Content-Type: app
 ```bash
 curl -s -X GET "http://localhost:8080/game/{gameId}" -H "Authorization: Bearer ACCESSTOKEN" | jq
 ```
-
----
