@@ -11,3 +11,9 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+
+# Скомпилированные файлы классов и ресурсов 
+*.class 
+*.war 
+*.ear 
+*.jar
