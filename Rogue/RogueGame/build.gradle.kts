@@ -1,0 +1,33 @@
+plugins {
+    id("java")
+    id("application")
+}
+
+group = "presentation"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("com.googlecode.lanterna:lanterna:3.1.3") // добавлено
+    implementation("com.google.code.gson:gson:2.10.1") //json
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass.set("com/roguegame/presentation/Presentation")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
